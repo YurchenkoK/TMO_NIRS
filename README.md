@@ -1,96 +1,44 @@
-# TMO_NIRS
+# ML Research — California Housing Prices
 
-**Научно-исследовательская работа студента (НИРС)**  
-Курс: Технологии машинного обучения (ТМО)  
-Группа: ИУ5-64Б  
-Автор: Юрченко К.Г.
+> Student research project (NIRS), Machine Learning Technologies course, BMSTU · Group IU5-64B
 
----
+A comparative study of machine learning models on the California Housing dataset (1990 census). The notebook covers both a binary classification task (expensive vs. affordable housing) and a regression task (median house value prediction), with full EDA, feature engineering, hyperparameter tuning, and model comparison.
 
-## Описание
+## Tasks
 
-Проект посвящён анализу данных и построению моделей машинного обучения на примере датасета **California Housing Prices** — стоимость жилья в округах Калифорнии на основе переписи населения 1990 года.
+| Task | Target | Description |
+|---|---|---|
+| Classification | `price_class` | Above-median price → 1, otherwise → 0 |
+| Regression | `MedHouseVal` | Median house value in $100k units |
 
-Источник данных: [`sklearn.datasets.fetch_california_housing`](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html), также доступен на [Kaggle](https://www.kaggle.com/datasets/camnugent/california-housing-prices).
+## Notebook Contents
 
----
+1. Dataset description and problem formulation
+2. Data loading and preprocessing
+3. Exploratory data analysis — pair plots, violin charts, geographic price map
+4. Feature scaling (MinMaxScaler)
+5. Correlation analysis
+6. Baseline models (no tuning): LogR, KNN, SVC, DecisionTree, RandomForest, GradientBoosting
+7. Hyperparameter search (GridSearchCV, 5-fold cross-validation)
+8. Comparison of baseline vs. optimized models
 
-## Задачи
+## Results
 
-| Задача | Целевой признак | Описание |
-|--------|----------------|----------|
-| Классификация | `price_class` | Жильё «дорогое» (выше медианы) — 1, иначе — 0 |
-| Регрессия | `MedHouseVal` | Медианная стоимость жилья ($100k) |
+**Best regression models (R²)**
 
----
-
-## Структура проекта
-
-```
-TMO_NIRS/
-├── nirs_california_housing.ipynb
-└── README.md
-```
-
----
-
-## Содержание ноутбука
-
-1. Описание датасета и постановка задачи
-2. Импорт библиотек
-3. Загрузка и предобработка данных
-4. Разведочный анализ данных (EDA): парные диаграммы, скрипичные графики, географическая карта цен
-5. Масштабирование признаков (MinMaxScaler)
-6. Корреляционный анализ
-7. Выбор метрик качества
-8. Baseline-модели (без подбора гиперпараметров):
-   - Классификация: LogR, KNN, SVC, DecisionTree, RandomForest, GradientBoosting
-   - Регрессия: LinearRegression, KNN, SVR, DecisionTree, RandomForest, GradientBoosting
-9. Подбор гиперпараметров (GridSearchCV, 5-fold CV)
-10. Сравнение baseline и оптимизированных моделей
-11. Выводы
-
----
-
-## Результаты
-
-### Классификация (лучшие модели по ROC AUC)
-
-| Модель | Precision | Recall | F1 | ROC AUC |
-|--------|-----------|--------|----|---------|
-| GradientBoosting | высокий | высокий | высокий | наивысший |
-| RandomForest | высокий | высокий | высокий | высокий |
-
-### Регрессия (предсказание стоимости жилья)
-
-| Модель | MAE | MSE | R² |
-|--------|-----|-----|----|
+| Model | MAE | MSE | R² |
+|---|---|---|---|
 | RandomForest | 0.325 | 0.243 | **0.817** |
 | GradientBoosting | 0.362 | 0.265 | 0.800 |
 | LinearRegression | 0.534 | 0.512 | 0.614 |
 
----
+**Best classification models:** GradientBoosting and RandomForest achieved the highest ROC AUC after tuning.
 
-## Зависимости
-
-```
-numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
-```
-
-Установка:
+## Running
 
 ```bash
 pip install numpy pandas matplotlib seaborn scikit-learn
-```
-
----
-
-## Запуск
-
-```bash
 jupyter notebook nirs_california_housing.ipynb
 ```
+
+Dataset source: `sklearn.datasets.fetch_california_housing`
